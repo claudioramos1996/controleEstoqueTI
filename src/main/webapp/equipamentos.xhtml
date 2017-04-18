@@ -1,0 +1,160 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/comuns/template.xhtml">
+
+	<ui:define name="tituloPagina">#{msg.Equipamentos} </ui:define>
+
+	<ui:define name="conteudo">
+		<h:form>
+			<p:growl id="growl" life="5000" />
+
+			<div class="ui-md-5 ui-g-nopad" style="margin-left: 25%;">
+
+				<p:panel id="lista" rendered="true"
+					header="Equipamentos Cadastrados">
+
+					<p:dataTable value="#{equipamentoBean.view.listaEquip}" var="item"
+						selection="#{equipamentoBean.view.selecEquip}" rowKey="#{item.id}"
+						selectionMode="single"
+						emptyMessage="Nenhum equipamento cadastrado">
+
+						<p:ajax update="@form" event="rowSelect"
+							listener="#{equipamentoBean.onRowSelect}" />
+						<p:column>
+							<f:facet name="header">
+								<p:outputLabel value="#{msg.Nome}" />
+							</f:facet>
+								#{item.nome}
+							</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<p:outputLabel value="#{msg.TipoEquipamento}" />
+							</f:facet>
+								#{item.tipoEquipamento.nome}
+							</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<p:outputLabel value="#{msg.Valor}" />
+							</f:facet>
+
+							<h:outputText value="#{item.valor}">
+								<f:convertNumber type="currency" />
+							</h:outputText>
+
+						</p:column>
+
+						<f:facet name="footer">
+
+							<h:panelGroup id="botoes">
+								<p:commandButton value="Alterar"
+									disabled="#{!equipamentoBean.view.habilitarDeleteAlterar}"
+									icon="fa fa-fw fa-edit"
+									actionListener="#{equipamentoBean.abrirAlterar}" update="@form" />
+
+								<p:commandButton value="Deletar"
+									disabled="#{!equipamentoBean.view.habilitarDeleteAlterar}"
+									icon="fa fa-fw fa-remove"
+									actionListener="#{equipamentoBean.excluir}" update="@form">
+									<p:confirm header="Confimar a exclusão"
+										message="Confirma a Exclusão da categoria: #{equipamentoBean.view.selecEquip.nome}" />
+								</p:commandButton>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="fade">
+
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+
+									<p:commandButton value="Não" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+
+								</p:confirmDialog>
+
+							</h:panelGroup>
+
+						</f:facet>
+
+					</p:dataTable>
+
+					<p:commandButton value="Cadastrar"
+						actionListener="#{equipamentoBean.abrirCadastrar}"
+						update="@form incluirID" icon="fa fa-plus" />
+
+				</p:panel>
+
+
+				<p:panel id="incluirID"
+					rendered="#{equipamentoBean.view.mostrarCadastro}"
+					header="Incluir Equipamento">
+
+					<p:panelGrid columns="2">
+
+						<p:outputLabel value="Nome do Equipamento*:" />
+						<p:inputText value="#{equipamentoBean.view.equipNew.nome}" />
+
+						<p:outputLabel value="Categoria de Equipamento*:" />
+						<p:selectOneMenu
+							value="#{equipamentoBean.view.equipNew.tipoEquipamento}">
+							<f:selectItem noSelectionOption="false" itemLabel="Selecione" />
+							<f:selectItems value="#{equipamentoBean.view.tipoEquipItens}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Valor do Equipamento*:" />
+						<p:inputNumber id="valor"
+							value="#{equipamentoBean.view.equipNew.valor}" symbol=" R$ "
+							symbolPosition="p" decimalSeparator="," thousandSeparator="." />
+						<p:commandButton
+							actionListener="#{equipamentoBean.cadastrarEquipamento}"
+							value="Cadastrar" style="margin-left:5em;" update="@form" />
+
+						<p:commandButton
+							actionListener="#{equipamentoBean.fecharAlterarIncluir}"
+							value="Cancelar" style="margin-left:5em;" update="@form" />
+
+					</p:panelGrid>
+				</p:panel>
+
+
+
+				<p:panel id="AlterarTipo"
+					rendered="#{equipamentoBean.view.mostrarAlterar}" header="Alterar">
+					<p:panelGrid columns="1">
+
+						<p:outputLabel value="Nome do Equipamento*:" />
+						<p:inputText value="#{equipamentoBean.view.selecEquip.nome}" />
+
+
+						<p:outputLabel value="Categoria de Equipamento*:" />
+						<p:selectOneMenu
+							value="#{equipamentoBean.view.equipNew.tipoEquipamento}">
+							<f:selectItem noSelectionOption="false" itemLabel="Selecione" />
+							<f:selectItems value="#{equipamentoBean.view.tipoEquipItens}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Valor do Equipamento*:" />
+						<p:inputNumber value="#{equipamentoBean.view.equipNew.valor}"
+							symbol=" R$ " symbolPosition="p" decimalSeparator=","
+							thousandSeparator="." />
+
+						<p:panelGrid>
+							<p:commandButton
+								actionListener="#{equipamentoBean.alterarEquipamento}"
+								value="Alterar" style="margin-left:5em;" update="@form" />
+
+							<p:commandButton
+								actionListener="#{equipamentoBean.fecharAlterarIncluir}"
+								value="Cancelar" style="margin-left:5em;" update="@form" />
+						</p:panelGrid>
+					</p:panelGrid>
+
+				</p:panel>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

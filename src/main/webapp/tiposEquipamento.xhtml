@@ -1,0 +1,116 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/comuns/template.xhtml">
+
+	<ui:define name="tituloPagina">#{msg.Equipamentos} </ui:define>
+
+	<ui:define name="conteudo">
+		<h:form>
+			<p:growl id="growl" life="5000" />
+
+			<div class="ui-md-5 ui-g-nopad" style="margin-left: 25%;">
+
+				<p:panel id="listaTipo" rendered="true" header="Tipos Cadastradas">
+
+					<p:dataTable value="#{tipoEquipamentoBean.listaCadastrados}"
+						var="item" selection="#{tipoEquipamentoBean.selecionado}"
+						rowKey="#{item.id}" selectionMode="single" paginator="true"
+						rows="15" paginatorPosition="bottom">
+
+						<p:ajax update="@form" event="rowSelect"
+							listener="#{tipoEquipamentoBean.onRowSelect}" />
+						<p:column>
+							<f:facet name="header">
+								<p:outputLabel value="Nome" />
+							</f:facet>
+								#{item.nome}
+							</p:column>
+
+						<f:facet name="footer">
+
+							<h:panelGroup id="botoes">
+								<p:commandButton value="Alterar"
+									disabled="#{!tipoEquipamentoBean.botaoDeleteAlterar}"
+									icon="fa fa-fw fa-edit"
+									actionListener="#{tipoEquipamentoBean.abrirAlterar}"
+									update="@form" />
+
+								<p:commandButton value="Deletar"
+									disabled="#{!tipoEquipamentoBean.botaoDeleteAlterar}"
+									icon="fa fa-fw fa-remove"
+									actionListener="#{tipoEquipamentoBean.excluir}" update="@form">
+									<p:confirm header="Confimar a exclusão"
+										message="Confirma a Exclusão da categoria: #{tipoEquipamentoBean.selecionado.nome}" />
+								</p:commandButton>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="fade">
+
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+
+									<p:commandButton value="Não" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+
+								</p:confirmDialog>
+
+							</h:panelGroup>
+
+						</f:facet>
+
+					</p:dataTable>
+
+					<p:commandButton value="Cadastrar"
+						actionListener="#{tipoEquipamentoBean.abrirCadastrar}"
+						update="@form" icon="fa fa-plus" />
+
+				</p:panel>
+
+
+				<p:panel id="IncluirTipo"
+					rendered="#{tipoEquipamentoBean.mostrarCadastro}"
+					header="Incluir Tipo de Equipamentos">
+
+					<p:panelGrid columns="1">
+
+						<p:inputText value="#{tipoEquipamentoBean.nomeNovo}" />
+
+						<p:panelGrid>
+							<p:commandButton
+								actionListener="#{tipoEquipamentoBean.cadastrarTipoEquipamento}"
+								value="Cadastrar" style="margin-left:5em;" update="@form" />
+
+							<p:commandButton
+								actionListener="#{tipoEquipamentoBean.fecharCadastroAlterar}"
+								value="Cancelar" style="margin-left:5em;" update="@form" />
+						</p:panelGrid>
+					</p:panelGrid>
+				</p:panel>
+
+
+
+				<p:panel id="AlterarTipo"
+					rendered="#{tipoEquipamentoBean.mostrarAlterar}" header="Alterar">
+					<p:panelGrid columns="1">
+						<p:inputText value="#{tipoEquipamentoBean.nomeNovo}" />
+
+						<p:panelGrid>
+							<p:commandButton
+								actionListener="#{tipoEquipamentoBean.alterarTipoEquipamento}"
+								value="Alterar" style="margin-left:5em;" update="@form" />
+
+							<p:commandButton
+								actionListener="#{tipoEquipamentoBean.fecharCadastroAlterar}"
+								value="Cancelar" style="margin-left:5em;" update="@form" />
+						</p:panelGrid>
+					</p:panelGrid>
+
+				</p:panel>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

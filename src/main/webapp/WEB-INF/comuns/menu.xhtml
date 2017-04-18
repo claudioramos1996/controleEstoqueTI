@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form>
+		<p:tabMenu activeIndex="#{param.i}">
+			<p:menuitem value="#{msg.Equipamentos}" outcome="/equipamentos.xhtml" >
+				 <f:param name="i" value="0" />
+			</p:menuitem>
+			<p:menuitem value="#{msg.TiposEquipamentos}" outcome="/tiposEquipamento.xhtml">
+				<f:param name="i" value="1" />
+			</p:menuitem>
+		</p:tabMenu>
+	</h:form>
+
+</ui:composition>
