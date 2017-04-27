@@ -3,31 +3,19 @@ package controleEstoqueTi.service;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 import controleEstoqueTi.model.Equipamento;
+import controleEstoqueTi.util.JpaUtil;
 
 public class EquipamentoDao {
 	
-	private EntityManagerFactory factManager = Persistence.createEntityManagerFactory("controleEstoqueTi");
-	private EntityManager em = factManager.createEntityManager();
-
-	
-	
-	public EquipamentoDao(){
-		
-		if(!em.isOpen())
-			em.getTransaction().begin();
-	}
+	private EntityManager em = JpaUtil.getEntityManager();
 
 	public List<Equipamento> getEquipamentoAll(){
-		
 		return em.createQuery("select a from Equipamento a",Equipamento.class).getResultList();
 	}
 	
 	public Equipamento getEquipamentoID(int id){
-		
 		return em.find(Equipamento.class, id);
 	}
 	
@@ -51,7 +39,6 @@ public class EquipamentoDao {
 		em.getTransaction().commit();
 		
 	}
-	
 	public void excluirEquipamento(int id){
 		
 		Equipamento equip = em.getReference(Equipamento.class, id);

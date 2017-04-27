@@ -10,7 +10,9 @@ public class ExecutarSist {
 
 	public static void main(String[] args) {
 		
-		excluir();
+		testeConsulta();
+		
+		testeListar();
 		
 	}
 	

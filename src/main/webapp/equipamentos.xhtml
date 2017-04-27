@@ -19,7 +19,7 @@
 					<p:dataTable value="#{equipamentoBean.view.listaEquip}" var="item"
 						selection="#{equipamentoBean.view.selecEquip}" rowKey="#{item.id}"
 						selectionMode="single"
-						emptyMessage="Nenhum equipamento cadastrado">
+						emptyMessage="#{msg.NenhumRegistroEncontrado}">
 
 						<p:ajax update="@form" event="rowSelect"
 							listener="#{equipamentoBean.onRowSelect}" />

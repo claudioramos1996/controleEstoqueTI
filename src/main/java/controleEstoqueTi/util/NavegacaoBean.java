@@ -2,7 +2,6 @@ package controleEstoqueTi.util;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 @SessionScoped

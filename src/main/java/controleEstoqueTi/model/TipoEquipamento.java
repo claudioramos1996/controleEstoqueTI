@@ -2,7 +2,9 @@ package controleEstoqueTi.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -16,8 +18,15 @@ public class TipoEquipamento {
 	
 	private String nome;
 
-	@OneToMany
+	@OneToMany(mappedBy="tipoEquipamento",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private List<Equipamento> listaEquipamento;
+		
+	public long qtdeEquipamentosUtilizando(){
+		// Primeiro Acesso para sair do lazy
+		//this.getListaEquipamento();
+		
+		return this.getListaEquipamento().size();
+	}
 	
 	public int getId() {
 		return id;
@@ -41,6 +50,10 @@ public class TipoEquipamento {
 
 	public void setListaEquipamento(List<Equipamento> listaEquipamento) {
 		this.listaEquipamento = listaEquipamento;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override

@@ -10,14 +10,16 @@ import javax.faces.context.FacesContext;
 
 import controleEstoqueTi.model.Equipamento;
 import controleEstoqueTi.service.EquipamentoDao;
-import controleEstoqueTi.service.Service;
+import controleEstoqueTi.service.TipoEquipamentoDao;
 import controleEstoqueTi.viewHelper.EquipamentoView;
 
 @ManagedBean
 @ViewScoped
 public class EquipamentoBean implements Serializable {
-
-	private Service service;
+	
+	private EquipamentoDao  equipDao= new EquipamentoDao();
+	
+	private TipoEquipamentoDao tpEquipDao = new TipoEquipamentoDao();
 
 	private EquipamentoView view;
 
@@ -42,12 +44,11 @@ public class EquipamentoBean implements Serializable {
 
 	private void carregarTiposEquipamento() {
 
-		getView().setListaTipoEquip(service.TipoEquipamento.listaTipoEquipamento());
+		getView().setListaTipoEquip(this.tpEquipDao.listaTipoEquipamento());
 	}
 
 	private void carregarTabela() {
-
-		getView().setListaEquip(service.Equipamento.getEquipamentoAll());
+		getView().setListaEquip(this.equipDao.getEquipamentoAll());
 
 	}
 
@@ -56,7 +57,7 @@ public class EquipamentoBean implements Serializable {
 		if(!isValidoEquip(getView().getEquipNew()))
 			return; 
 		
-		service.Equipamento.setEquipamento(getView().getEquipNew());
+		this.equipDao.setEquipamento(getView().getEquipNew());
 
 		carregarTabela();
 
@@ -69,7 +70,7 @@ public class EquipamentoBean implements Serializable {
 		if(!isValidoEquip(getView().getEquipNew()))
 			return;
 		
-		service.Equipamento.alterarEquipamento(getView().getSelecEquip());
+		this.equipDao.alterarEquipamento(getView().getSelecEquip());
 
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alterado com Sucesso", null);
 
@@ -83,7 +84,7 @@ public class EquipamentoBean implements Serializable {
 
 	public void excluir() {
 
-		service.Equipamento.excluirEquipamento(getView().getSelecEquip().getId());
+		this.equipDao.excluirEquipamento(getView().getSelecEquip().getId());
 
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Deletado com Sucesso", null);
 
@@ -156,14 +157,7 @@ public class EquipamentoBean implements Serializable {
 	/*
 	 * Getters e Setters
 	 */
-	public EquipamentoDao getService() {
-		return service.Equipamento;
-	}
-
-	public void setService(EquipamentoDao service) {
-		this.service.Equipamento = service;
-	}
-
+	
 	public EquipamentoView getView() {
 		return view;
 	}

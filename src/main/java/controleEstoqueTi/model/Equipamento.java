@@ -2,11 +2,12 @@ package controleEstoqueTi.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Equipamento {
@@ -15,7 +16,7 @@ public class Equipamento {
 	@GeneratedValue
 	private Integer id;
 	
-	@OneToOne
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private TipoEquipamento tipoEquipamento;
 	
 	private String nome;
