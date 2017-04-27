@@ -3,7 +3,7 @@
 
 <p>
   Sistema para controle de estoque de TI, sistema criado em java, rodando no servidor Tomcat 8, sistema utiliza
-  navegação por estado da tela, através de AJAX. Utiliza a biblioteca PrimeFaces 6.0 e JPA com Hibernate.
+  navegação por estado da tela através de AJAX e JUnit. Utiliza a biblioteca PrimeFaces 6.0 e JPA com Hibernate.
 </p>
 
 <h2>Técnologias Envolvidas</h2>
