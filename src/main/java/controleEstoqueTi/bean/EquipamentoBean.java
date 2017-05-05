@@ -1,6 +1,7 @@
 package controleEstoqueTi.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -30,11 +31,16 @@ public class EquipamentoBean implements Serializable {
 
 		view = new EquipamentoView();
 
+		FacesContext context = FacesContext.getCurrentInstance();
+		
 		carregarDados();
 
 		view.init();
 	}
 
+	/*
+	 * CARREGAMENTO DOS DADOS
+	 */
 	private void carregarDados() {
 
 		carregarTabela();
@@ -49,9 +55,12 @@ public class EquipamentoBean implements Serializable {
 
 	private void carregarTabela() {
 		getView().setListaEquip(this.equipDao.getEquipamentoAll());
-
+		
 	}
-
+	
+	/*
+	 * OPERAÇÕES BASICAS
+	 */
 	public void cadastrarEquipamento() {
 
 		if(!isValidoEquip(getView().getEquipNew()))
@@ -98,6 +107,18 @@ public class EquipamentoBean implements Serializable {
 
 	}
 
+	/*
+	 * OPERAÇÃO DE FILTRO
+	 */
+	
+	public List<Equipamento> retornaFiltro(Object value, Object filter){
+		
+		String texto = value.toString();
+		
+		return null;
+		
+	}
+	
 	public boolean isValidoEquip(Equipamento equip) {
 		FacesMessage msg = null;
 

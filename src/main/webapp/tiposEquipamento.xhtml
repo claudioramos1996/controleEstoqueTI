@@ -18,7 +18,8 @@
 					<p:dataTable value="#{tipoEquipamentoBean.listaCadastrados}"
 						var="item" selection="#{tipoEquipamentoBean.selecionado}"
 						rowKey="#{item.id}" selectionMode="single" paginator="true"
-						rows="15" paginatorPosition="bottom" emptyMessage="#{msg.NenhumRegistroEncontrado}"  >
+						rows="15" paginatorPosition="bottom"
+						emptyMessage="#{msg.NenhumRegistroEncontrado}">
 
 						<p:ajax update="@form" event="rowSelect"
 							listener="#{tipoEquipamentoBean.onRowSelect}" />
@@ -49,12 +50,12 @@
 									disabled="#{!tipoEquipamentoBean.botaoDeleteAlterar}"
 									icon="fa fa-fw fa-remove"
 									actionListener="#{tipoEquipamentoBean.excluir}" update="@form">
-									<p:confirm header="Confimar a exclusão"
-										message="Confirma a Exclusão da categoria: #{tipoEquipamentoBean.selecionado.nome}" />
+									<p:confirm header="Confimar a exclusão" 
+										message="#{msg.MsgExclusaoTipoEquip}  #{tipoEquipamentoBean.selecionado.nome} #{msg.MsgExclusaoAviso}" />
 								</p:commandButton>
 
 								<p:confirmDialog global="true" showEffect="fade"
-									hideEffect="fade">
+									hideEffect="fade" style="white-space: pre-line;">
 
 									<p:commandButton value="Sim" type="button"
 										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />

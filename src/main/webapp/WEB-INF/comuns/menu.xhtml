@@ -6,11 +6,15 @@
 
 	<h:form>
 		<p:tabMenu activeIndex="#{param.i}">
-			<p:menuitem value="#{msg.Equipamentos}" outcome="/equipamentos.xhtml" >
-				 <f:param name="i" value="0" />
+			<p:menuitem value="#{msg.Painel}" outcome="/panel.xhtml">
+				<f:param name="i" value="0" />
 			</p:menuitem>
-			<p:menuitem value="#{msg.TiposEquipamentos}" outcome="/tiposEquipamento.xhtml">
+			<p:menuitem value="#{msg.Equipamentos}" outcome="/equipamentos.xhtml">
 				<f:param name="i" value="1" />
+			</p:menuitem>
+			<p:menuitem value="#{msg.TiposEquipamentos}"
+				outcome="/tiposEquipamento.xhtml">
+				<f:param name="i" value="2" />
 			</p:menuitem>
 		</p:tabMenu>
 	</h:form>

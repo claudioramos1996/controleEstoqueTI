@@ -14,7 +14,8 @@
 			<property name="javax.persistence.jdbc.password" value="1234" />
 			<!-- atualiza o banco, gera as tabelas se for preciso -->
 			<property name="hibernate.hbm2ddl.auto" value="update" />
-			<property name="eclipselink.query-results-cache" value="false"/>
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
 		</properties>
 	</persistence-unit>
 </persistence>

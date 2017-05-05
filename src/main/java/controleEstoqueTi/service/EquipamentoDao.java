@@ -3,7 +3,9 @@ package controleEstoqueTi.service;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
+import controleEstoqueTi.exceptions.NaoEncontrado;
 import controleEstoqueTi.model.Equipamento;
 import controleEstoqueTi.util.JpaUtil;
 
@@ -14,7 +16,18 @@ public class EquipamentoDao {
 	public List<Equipamento> getEquipamentoAll(){
 		return em.createQuery("select a from Equipamento a",Equipamento.class).getResultList();
 	}
-	
+	public Equipamento getEquipamento(String equipNome) throws NaoEncontrado {
+		
+		String jpql = "select equip from Equipamento equip where equip.nome like :nomeEquip";
+		
+		Query query = em.createQuery(jpql,Equipamento.class);
+		
+		query.setParameter("nomeEquip", equipNome);
+		
+		query.getResultList();
+		
+		return (Equipamento) query.getSingleResult();
+	}
 	public Equipamento getEquipamentoID(int id){
 		return em.find(Equipamento.class, id);
 	}

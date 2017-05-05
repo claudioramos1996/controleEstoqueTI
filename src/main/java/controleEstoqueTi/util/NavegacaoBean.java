@@ -16,6 +16,13 @@ public class NavegacaoBean  implements Serializable{
 	
 	private final String outcome_TiposEquipamentos = "Crud_Tipo_Equipamento";
 
+	
+	public int indiceMenu(String outcome){
+		return 0;
+
+	}
+	
+	
 	public String iniciarEquipamentos(){
 		return outcome_Equipamentos;
 	}

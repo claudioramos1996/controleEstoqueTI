@@ -25,6 +25,8 @@ public class EquipamentoView {
 	private List<SelectItem> tipoEquipItens = new ArrayList<SelectItem>();
 
 	private List<TipoEquipamento> listaTipoEquip;
+	
+	private List<Equipamento> listaFiltradaEquip;
 
 	public void init() {
 
@@ -102,6 +104,14 @@ public class EquipamentoView {
 
 	public void setHabilitarDeleteAlterar(boolean habilitarDeleteAlterar) {
 		HabilitarDeleteAlterar = habilitarDeleteAlterar;
+	}
+
+	public List<Equipamento> getListaFiltradaEquip() {
+		return listaFiltradaEquip;
+	}
+
+	public void setListaFiltradaEquip(List<Equipamento> listaFiltradaEquip) {
+		this.listaFiltradaEquip = listaFiltradaEquip;
 	}
 
 	

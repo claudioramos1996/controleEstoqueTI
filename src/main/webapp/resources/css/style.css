@@ -1,7 +1,37 @@
 @CHARSET "UTF-8";
 
-article{
-	
+article {
 	width: 100%;
-	height:500px;
+	height: 500px;
+}
+
+@media screen and (min-width: 800px) {
+	#pagina .panel {
+		width: 49.6%;
+		height: 400px;
+		border-width: 0.001em;
+		border-style: solid;
+		border-color: black;
+		background-color: #f5f5f5;
+		margin-bottom: 0.5em;
+		background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff),
+			to(#e6e6e6));
+			text-align: center;
+	}
+	.panel-left {
+		margin-right: 0.5em;
+	}
+	h1 {
+		text-transform: uppercase;
+		text-align: center;
+		border-bottom-width: 0.1em;
+		border-bottom-style: solid;
+		padding-bottom: 0.3em;
+	}
+	.panel .ui-g{
+		height: 30%;
+	}
+	.panel .ui-panel-content{
+		font-size: 1.5em;
+	}
 }

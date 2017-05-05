@@ -19,11 +19,16 @@
 					<p:dataTable value="#{equipamentoBean.view.listaEquip}" var="item"
 						selection="#{equipamentoBean.view.selecEquip}" rowKey="#{item.id}"
 						selectionMode="single"
-						emptyMessage="#{msg.NenhumRegistroEncontrado}">
+						emptyMessage="#{msg.NenhumRegistroEncontrado}"
+						filteredValue="#{equipamentoBean.view.listaFiltradaEquip}"
+						widgetVar="EquipamentosTable"
+						paginator="true" rows="15" paginatorPosition="bottom"
+						>
 
 						<p:ajax update="@form" event="rowSelect"
 							listener="#{equipamentoBean.onRowSelect}" />
-						<p:column>
+							
+						<p:column filterPosition="bottom" filterBy="#{item.nome}" >
 							<f:facet name="header">
 								<p:outputLabel value="#{msg.Nome}" />
 							</f:facet>

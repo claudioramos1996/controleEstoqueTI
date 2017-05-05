@@ -8,7 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
+ 
 @Entity
 public class Equipamento {
 
@@ -16,7 +16,7 @@ public class Equipamento {
 	@GeneratedValue
 	private Integer id;
 	
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.EAGER)
 	private TipoEquipamento tipoEquipamento;
 	
 	private String nome;

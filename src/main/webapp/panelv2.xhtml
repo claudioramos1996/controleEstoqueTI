@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/comuns/template.xhtml">
+
+	<ui:define name="tituloPagina">#{msg.Painel} </ui:define>
+
+	<ui:define name="conteudo">
+		<!-- 
+		<div class="ui-md-5 ui-g-nopad" style="margin-left: 25%;">
+		
+		
+		</div>
+		 -->
+		<div class="ui-g">
+			<div class="ui-g-12 ui-md-6 panel panel-left">
+				<h1>estoque</h1>
+				
+				<div class="ui-g">
+					<div class="ui-g-6">
+						<p:panel header="Armazenados">
+							<h:outputText value="455" />
+						</p:panel>
+					</div>
+					<div class="ui-g-6">
+						<p:panel header="Disponiveis">
+							<h:outputText value="455" />
+						</p:panel>
+					</div>
+				</div>
+				
+				<div class="ui-g">
+					<div class="ui-g-6">
+						<p:panel header="Pendentes de Entrada">
+							<h:outputText value="455" />
+						</p:panel>
+					</div>
+					<div class="ui-g-6">
+						<p:panel header="Pendentes de Saida">
+							<h:outputText value="455" />
+						</p:panel>
+					</div>
+				</div>
+
+			</div>
+			<div class="ui-g-12 ui-md-6 panel"></div>
+			<div class="ui-g-12 ui-md-6 panel panel-left"></div>
+			<div class="ui-g-12 ui-md-6 panel"></div>
+		</div>
+	</ui:define>
+
+</ui:composition>

@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import controleEstoqueTi.exceptions.NaoEncontrado;
 import controleEstoqueTi.model.Equipamento;
 import controleEstoqueTi.model.TipoEquipamento;
 
@@ -14,6 +15,33 @@ public class EquipamentoDaoTest {
 	private int idTeste;
 
 	private EquipamentoDao dao = new EquipamentoDao();
+	
+	//@Test
+	public void getEquipamento(){
+		
+		String nomeEquip = "Teste de Busca de Nome";
+		Equipamento equipTestes = new Equipamento();
+		
+		equipTestes.setNome(nomeEquip);
+		
+		
+		dao.setEquipamento(equipTestes);
+		
+		Equipamento equipRetorno = null;
+		
+		try {
+			
+			equipRetorno = dao.getEquipamento("Teste");
+			
+			Assert.assertNotNull(dao.getEquipamento("Teste"));
+			
+		} catch (NaoEncontrado e) {
+			e.printStackTrace();
+		}
+		
+		dao.excluirEquipamento(equipRetorno.getId());
+		
+	}
 	
 	@Test
 	public void testGetEquipamentoAll() {
