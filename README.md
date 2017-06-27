@@ -15,6 +15,9 @@
       JSF 2.2
     </li>
      <li>
+      CDI
+    </li>
+     <li>
       PrimeFaces 6.0
     </li>
     <li>
