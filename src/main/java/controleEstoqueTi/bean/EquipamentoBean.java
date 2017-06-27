@@ -5,22 +5,25 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import controleEstoqueTi.model.Equipamento;
 import controleEstoqueTi.service.EquipamentoDao;
 import controleEstoqueTi.service.TipoEquipamentoDao;
 import controleEstoqueTi.viewHelper.EquipamentoView;
 
-@ManagedBean
+@Named
 @ViewScoped
 public class EquipamentoBean implements Serializable {
 	
-	private EquipamentoDao  equipDao= new EquipamentoDao();
+	@Inject
+	private EquipamentoDao  equipDao;
 	
-	private TipoEquipamentoDao tpEquipDao = new TipoEquipamentoDao();
+	@Inject
+	private TipoEquipamentoDao tpEquipDao;
 
 	private EquipamentoView view;
 
@@ -30,9 +33,7 @@ public class EquipamentoBean implements Serializable {
 	public void init() {
 
 		view = new EquipamentoView();
-
-		FacesContext context = FacesContext.getCurrentInstance();
-		
+	
 		carregarDados();
 
 		view.init();

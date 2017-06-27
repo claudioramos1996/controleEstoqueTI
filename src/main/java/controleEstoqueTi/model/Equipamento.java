@@ -16,7 +16,7 @@ public class Equipamento {
 	@GeneratedValue
 	private Integer id;
 	
-	@ManyToOne(cascade=CascadeType.REFRESH,fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.REFRESH)
 	private TipoEquipamento tipoEquipamento;
 	
 	private String nome;

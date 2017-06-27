@@ -7,7 +7,8 @@ import javax.persistence.Persistence;
 public abstract class JpaUtil {
 
 	private static EntityManager entityManager;
-
+	
+	@Deprecated
 	public static EntityManager getEntityManager() {
 		
 		if(entityManager == null){

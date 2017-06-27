@@ -2,23 +2,23 @@ package controleEstoqueTi.service;
 
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 
 import controleEstoqueTi.model.TipoEquipamento;
-import controleEstoqueTi.util.JpaUtil;
-
+@RequestScoped
 public class TipoEquipamentoDao {
 
-	private static EntityManager em = JpaUtil.getEntityManager();
+	@Inject
+	private EntityManager em;
 
-	public TipoEquipamentoDao(){
-		if(!em.isOpen())
-			em.getTransaction().begin();
-	}
-	
 	public boolean incluirTipoEquip(String nomeTipo) {
 
 		em.getTransaction().begin();
+
 		TipoEquipamento tipoE = new TipoEquipamento();
 
 		tipoE.setNome(nomeTipo);
@@ -26,15 +26,11 @@ public class TipoEquipamentoDao {
 		em.persist(tipoE);
 
 		em.getTransaction().commit();
-		// em.close();
 
 		return true;
 	}
 
 	public List<TipoEquipamento> listaTipoEquipamento() {
-		if(!em.isOpen())
-			em.getTransaction().begin();
-		
 		em.clear();
 		return em.createQuery("select a from TipoEquipamento a", TipoEquipamento.class).getResultList();
 	}
@@ -44,9 +40,9 @@ public class TipoEquipamentoDao {
 		em.getTransaction().begin();
 
 		TipoEquipamento tpAlterar = em.getReference(TipoEquipamento.class, tipoEquip.getId());
-		
+
 		tpAlterar.setNome(tipoEquip.getNome());
-		
+
 		em.merge(tpAlterar);
 
 		em.getTransaction().commit();
@@ -58,19 +54,30 @@ public class TipoEquipamentoDao {
 		return em.find(TipoEquipamento.class, id);
 	}
 
-	public boolean deletarTipoEquipamento(int id)  {
+	public boolean deletarTipoEquipamento(int id) {
 		TipoEquipamento tp = em.getReference(TipoEquipamento.class, id);
-		
-		
-		
-		if(!em.getTransaction().isActive())
-			em.getTransaction().begin();
-		
+
+		em.getTransaction().begin();
+
 		em.remove(tp);
-		
+
 		em.getTransaction().commit();
-		
+
 		return true;
 	}
- 
+
+	public TipoEquipamento buscarTipoEquipamento(String nome) {
+
+		String jpql = "select tpEquip from TipoEquipamento tpEquip where tpEquip.nome = :nome";
+
+		Query query = em.createQuery(jpql, TipoEquipamento.class);
+
+		query.setParameter("nome", nome);
+
+		try {
+			return (TipoEquipamento) query.getSingleResult();
+		} catch (NoResultException noResult) {
+			return null;
+		}
+	}
 }

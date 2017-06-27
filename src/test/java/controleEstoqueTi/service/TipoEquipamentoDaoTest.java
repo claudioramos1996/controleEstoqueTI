@@ -36,4 +36,11 @@ public class TipoEquipamentoDaoTest {
 		fail("Not yet implemented");
 	}
 
+	public void buscarTipoEquipamento(){
+		
+		TipoEquipamentoDao dao = new TipoEquipamentoDao();
+		
+		dao.buscarTipoEquipamento("teste");
+	
+	}
 }
